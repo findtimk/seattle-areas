@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Seattle Areas — A Buyer's Comparison</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..900,0..100,0..1&family=DM+Sans:opsz,wght@9..40,300..700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script type="module" src="/src/main.ts"></script>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="masthead">
+    <span class="vol">Vol. 05 · A buyer's instrument</span>
+    <span id="data-freshness" class="data-freshness">Data: May 2026 snapshot · sources in footer</span>
+    <span>Seattle / King Co. / Q1 2026</span>
+  </div>
+
+  <header class="hero">
+    <h1>Seattle<br>Neighborhood<br><em>Lens.</em></h1>
+    <p class="dek">A side-by-side comparison instrument for evaluating where a Seattle home actually fits — by budget, by square foot, by life.</p>
+  </header>
+
+  <div class="profile-strip">
+    <span>Budget <strong id="profile-budget">$1,250,000</strong></span>
+    <span>Household <strong>Couple, no kids (yet)</strong></span>
+    <span>Horizon <strong>Family in ~18 months</strong></span>
+    <span>Property <strong>SFH / TH / Condo</strong></span>
+    <span>Commute → <strong>South Lake Union</strong></span>
+  </div>
+
+  <div class="controls">
+    <div class="control-block">
+      <h3>Target Budget</h3>
+      <div class="budget-display"><span id="budget-value">$1,250,000</span></div>
+      <div class="budget-meta">Drag to model what each neighborhood buys you.</div>
+      <input type="range" id="budget-slider" min="700000" max="1700000" step="25000" value="1250000" />
+    </div>
+
+    <div class="control-block">
+      <h3>What matters to you</h3>
+      <p class="helper">Set how much each factor should count when ranking. Same level = equal weight. <strong>Skip</strong> ignores it entirely.</p>
+      <div class="weight-table" id="weights"></div>
+      <div class="scale-key"><strong>Skip</strong> ignore · <strong>Nice</strong> small bonus · <strong>Important</strong> default · <strong>Critical</strong> dominates the ranking</div>
+    </div>
+  </div>
+
+  <div class="methodology">
+    <div class="meth-head">How each criterion is scored</div>
+    <div class="meth-grid">
+      <div><strong>Headroom</strong><span>Your budget vs. the neighborhood's typical 3BR price. 100 = budget clears the median; 0 = significantly under.</span></div>
+      <div><strong>Walkability</strong><span>Walk Score from walkscore.com. Distance-based score to amenities (groceries, food, parks). 0–100, verified.</span></div>
+      <div><strong>Schools</strong><span>GreatSchools-style 1–10 for the dominant elementary attendance zone. Estimates — verify per address.</span></div>
+      <div><strong>Transit</strong><span>Transit Score from walkscore.com. Bus + rail frequency &amp; proximity. 0–100, verified.</span></div>
+      <div><strong>Quietness</strong><span>Subjective. Derived from walkability inverse + known noise factors (flight paths, freeways, commercial cores).</span></div>
+      <div><strong>Commute</strong><span>Estimated AM drive time to South Lake Union, scored 0–100 (shorter = higher).</span></div>
+    </div>
+  </div>
+
+  <div class="section-head">
+    <h2>Neighborhoods, ranked</h2>
+    <span class="meta" id="rank-note">17 areas</span>
+  </div>
+  <p class="read-note">Ranks are <em>relative to this list and your weights</em>. The number under each name is a 0–100 fit score: useful for comparing within this view, not as an absolute rating. The tags show what's lifting and dragging each rank.</p>
+
+  <div class="nb-list" id="cards"></div>
+
+  <div class="chart-section">
+    <h2>Price per square foot, <em>at a glance.</em></h2>
+    <div class="sub">Median $/sqft, single-family homes — Q1 2026 estimates</div>
+    <div id="chart"></div>
+  </div>
+
+  <footer>
+    <div>
+      <h4>Methodology</h4>
+      <p>Each neighborhood is scored 0–100 on six dimensions: <strong>budget headroom</strong>, <strong>walkability</strong>, <strong>schools</strong>, <strong>transit</strong>, <strong>quietness</strong>, and <strong>commute</strong>. Your weights set how much each counts. Fit score is the weighted average — meaningful only relative to other neighborhoods on this page.</p>
+      <p>"What your budget buys" = budget ÷ local $/sqft. Directionally useful, not a guarantee — actual listings vary by lot, condition, vintage, and view. Commute estimates assume typical AM drive to South Lake Union.</p>
+      <p style="margin-top:12px;font-style:italic;font-family:'Fraunces',serif;color:var(--ink-soft);">Per-field source attribution lives in the neighborhood data file. Schools field is the most uncertain — verify per specific address before relying on it.</p>
+    </div>
+    <div>
+      <h4>Primary sources</h4>
+      <p><strong>Walk / Transit Score:</strong> walkscore.com/WA/Seattle, fetched April 2026. All 17 neighborhoods verified.</p>
+      <p><strong>Demographics:</strong> US Census ACS 2019–2023 5-year estimates via Point2Homes. 14 of 17 neighborhoods directly verified for income; remainder are educated estimates.</p>
+      <p><strong>Home prices:</strong> Redfin neighborhood pages (Q1 2026), Maggie Sun Real Estate market reports (Mar 2026), Sammamish Mortgage neighborhood guide (Feb 2026), Homes.com 12-month medians.</p>
+      <p><strong>Citywide reference:</strong> Seattle median household income $123,860; median age 36; median sale price $865K (March 2026, Redfin).</p>
+      <p><strong>Schools:</strong> GreatSchools-style estimates only — <em>not verified per attendance zone</em>. Verify with your agent before relying on this.</p>
+      <p>Approximate, not advisory — confirm with your agent before writing an offer.</p>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
