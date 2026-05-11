@@ -23,14 +23,6 @@
     <p class="dek">A side-by-side comparison instrument for evaluating where a Seattle home actually fits — by budget, by square foot, by life.</p>
   </header>
 
-  <div class="profile-strip">
-    <span>Budget <strong id="profile-budget">$1,250,000</strong></span>
-    <span>Household <strong>Couple, no kids (yet)</strong></span>
-    <span>Horizon <strong>Family in ~18 months</strong></span>
-    <span>Property <strong>SFH / TH / Condo</strong></span>
-    <span>Commute → <strong>South Lake Union</strong></span>
-  </div>
-
   <div class="controls">
     <div class="control-block">
       <h3>Target Budget</h3>
@@ -48,8 +40,11 @@
   </div>
 
   <div class="methodology">
-    <div class="meth-head">How each criterion is scored</div>
-    <div class="meth-grid">
+    <div class="meth-head" id="meth-toggle">
+      How each criterion is scored
+      <span class="meth-chevron">▾</span>
+    </div>
+    <div class="meth-grid" id="meth-grid">
       <div><strong>Headroom</strong><span>Your budget vs. the neighborhood's typical 3BR price. 100 = budget clears the median; 0 = significantly under.</span></div>
       <div><strong>Walkability</strong><span>Walk Score from walkscore.com. Distance-based score to amenities (groceries, food, parks). 0–100, verified.</span></div>
       <div><strong>Schools</strong><span>GreatSchools-style 1–10 for the dominant elementary attendance zone. Estimates — verify per address.</span></div>

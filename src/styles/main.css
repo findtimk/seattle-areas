@@ -59,14 +59,6 @@ body::before {
   font-size: 19px; line-height: 1.45; color: var(--ink-soft); max-width: 360px;
 }
 
-.profile-strip {
-  display: flex; gap: 28px; padding: 18px 0; margin-top: 28px;
-  border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em;
-  color: var(--ink-faint); flex-wrap: wrap;
-}
-.profile-strip strong { color: var(--ink); font-weight: 600; margin-left: 6px; }
 
 .controls {
   margin: 40px 0 32px; padding: 28px 32px;
@@ -175,12 +167,22 @@ input[type="range"]::-moz-range-thumb {
   font-size: 10px; font-weight: 600;
   text-transform: uppercase; letter-spacing: 0.18em;
   color: var(--ink-faint);
-  margin-bottom: 18px; padding-bottom: 8px;
+  padding-bottom: 8px;
   border-bottom: 1px solid var(--rule);
+  display: flex; justify-content: space-between; align-items: center;
+  cursor: pointer; user-select: none;
+  transition: color 150ms;
 }
+.meth-head:hover { color: var(--ink); }
+.meth-chevron { font-size: 13px; transition: transform 280ms ease; }
+.methodology.open .meth-chevron { transform: rotate(180deg); }
 .meth-grid {
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px 28px;
+  max-height: 0; overflow: hidden;
+  transition: max-height 350ms cubic-bezier(0.22, 0.8, 0.25, 1), margin-top 350ms;
+  margin-top: 0;
 }
+.methodology.open .meth-grid { margin-top: 18px; }
 .meth-grid div {
   font-size: 12.5px; line-height: 1.5;
 }
