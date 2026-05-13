@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Data pipeline cache — large raw KC Assessor downloads, not needed in repo
+scripts/.cache/
+scripts/redfin_zip_tracker.tsv
