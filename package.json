@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "refresh-prices": "node scripts/refresh-prices.mjs",
+    "refresh-housing": "python3 scripts/process-parcel-data.py"
   },
   "devDependencies": {
     "typescript": "~6.0.2",

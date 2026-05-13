@@ -44,6 +44,38 @@ export function renderCards(data: Neighborhood[], state: AppState): void {
       </div>`;
     };
 
+    const decadeLabel = (yr: number): string => {
+      const decade = Math.floor(yr / 10) * 10;
+      return `Mostly ${decade}s–${(decade + 10).toString().slice(-2)}s`;
+    };
+
+    const housingCharHTML = `
+      <div class="housing-char">
+        <div class="heading">
+          <span>Housing Character</span>
+          <span class="src">KC Assessor · SFH+townhomes</span>
+        </div>
+        <div class="hc-rows">
+          <div class="hc-row">
+            <span class="hck">Built</span>
+            <span class="hcv">${decadeLabel(n.medianYearBuilt)}</span>
+          </div>
+          <div class="hc-row">
+            <span class="hck">Lot size</span>
+            <span class="hcv">~${n.medianLotSqft.toLocaleString()} sqft typical</span>
+          </div>
+          <div class="hc-row">
+            <span class="hck">Garage</span>
+            <span class="hcv">${n.pctWithGarage}% of homes have one</span>
+          </div>
+          <div class="hc-row">
+            <span class="hck">Home type</span>
+            <span class="hcv">${n.pctSingleFamily}% SFH · ${100 - n.pctSingleFamily}% townhome</span>
+          </div>
+        </div>
+      </div>
+    `;
+
     const hidden = !showAll && i >= TOP_N;
 
     const row = document.createElement("div");
@@ -112,6 +144,7 @@ export function renderCards(data: Neighborhood[], state: AppState): void {
                 <div class="demo-cell"><div class="v">${n.pctKids}%</div><div class="k">Kids</div></div>
               </div>
             </div>
+            ${housingCharHTML}
           </div>
           <div>
             <div class="det-col-head">Why it works / Tradeoffs</div>

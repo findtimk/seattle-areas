@@ -1,0 +1,206 @@
+{
+  "Ballard": {
+    "medianYearBuilt": 1930,
+    "medianLotSqft": 3371,
+    "pctWithGarage": 37,
+    "housingMix": {
+      "pctSingleFamily": 61,
+      "pctTownhome": 39,
+      "pctCondo": 0
+    },
+    "_sampleSize": 38,
+    "_note": "King County Assessor EXTR_ResBldg.csv + EXTR_Parcel.csv (May 2026)"
+  },
+  "Beacon Hill": {
+    "medianYearBuilt": 1955,
+    "medianLotSqft": 5800,
+    "pctWithGarage": 48,
+    "housingMix": {
+      "pctSingleFamily": 90,
+      "pctTownhome": 10,
+      "pctCondo": 0
+    },
+    "_sampleSize": 145,
+    "_note": "King County Assessor EXTR_ResBldg.csv + EXTR_Parcel.csv (May 2026)"
+  },
+  "Capitol Hill": {
+    "medianYearBuilt": 1932,
+    "medianLotSqft": 4200,
+    "pctWithGarage": 48,
+    "housingMix": {
+      "pctSingleFamily": 89,
+      "pctTownhome": 11,
+      "pctCondo": 0
+    },
+    "_sampleSize": 27,
+    "_note": "King County Assessor EXTR_ResBldg.csv + EXTR_Parcel.csv (May 2026)"
+  },
+  "Columbia City": {
+    "medianYearBuilt": 1955,
+    "medianLotSqft": 5700,
+    "pctWithGarage": 45,
+    "housingMix": {
+      "pctSingleFamily": 91,
+      "pctTownhome": 9,
+      "pctCondo": 0
+    },
+    "_sampleSize": 139,
+    "_note": "King County Assessor EXTR_ResBldg.csv + EXTR_Parcel.csv (May 2026)"
+  },
+  "Crown Hill": {
+    "medianYearBuilt": 1945,
+    "medianLotSqft": 5125,
+    "pctWithGarage": 53,
+    "housingMix": {
+      "pctSingleFamily": 93,
+      "pctTownhome": 7,
+      "pctCondo": 0
+    },
+    "_sampleSize": 124,
+    "_note": "King County Assessor EXTR_ResBldg.csv + EXTR_Parcel.csv (May 2026)"
+  },
+  "Fremont": {
+    "medianYearBuilt": 1927,
+    "medianLotSqft": 4057,
+    "pctWithGarage": 45,
+    "housingMix": {
+      "pctSingleFamily": 80,
+      "pctTownhome": 20,
+      "pctCondo": 0
+    },
+    "_sampleSize": 101,
+    "_note": "King County Assessor EXTR_ResBldg.csv + EXTR_Parcel.csv (May 2026)"
+  },
+  "Green Lake": {
+    "medianYearBuilt": 1927,
+    "medianLotSqft": 4057,
+    "pctWithGarage": 45,
+    "housingMix": {
+      "pctSingleFamily": 80,
+      "pctTownhome": 20,
+      "pctCondo": 0
+    },
+    "_sampleSize": 101,
+    "_note": "King County Assessor EXTR_ResBldg.csv + EXTR_Parcel.csv (May 2026)"
+  },
+  "Madison Valley": {
+    "medianYearBuilt": 1933,
+    "medianLotSqft": 4800,
+    "pctWithGarage": 52,
+    "housingMix": {
+      "pctSingleFamily": 90,
+      "pctTownhome": 10,
+      "pctCondo": 0
+    },
+    "_sampleSize": 61,
+    "_note": "King County Assessor EXTR_ResBldg.csv + EXTR_Parcel.csv (May 2026)"
+  },
+  "Magnolia": {
+    "medianYearBuilt": 1949,
+    "medianLotSqft": 5796,
+    "pctWithGarage": 73,
+    "housingMix": {
+      "pctSingleFamily": 100,
+      "pctTownhome": 0,
+      "pctCondo": 0
+    },
+    "_sampleSize": 59,
+    "_note": "King County Assessor EXTR_ResBldg.csv + EXTR_Parcel.csv (May 2026)"
+  },
+  "Maple Leaf / Ravenna": {
+    "medianYearBuilt": 1953,
+    "medianLotSqft": 7650,
+    "pctWithGarage": 55,
+    "housingMix": {
+      "pctSingleFamily": 94,
+      "pctTownhome": 6,
+      "pctCondo": 0
+    },
+    "_sampleSize": 121,
+    "_note": "King County Assessor EXTR_ResBldg.csv + EXTR_Parcel.csv (May 2026)"
+  },
+  "Mount Baker": {
+    "medianYearBuilt": 1928,
+    "medianLotSqft": 4051,
+    "pctWithGarage": 46,
+    "housingMix": {
+      "pctSingleFamily": 80,
+      "pctTownhome": 20,
+      "pctCondo": 0
+    },
+    "_sampleSize": 97,
+    "_note": "King County Assessor EXTR_ResBldg.csv + EXTR_Parcel.csv (May 2026)"
+  },
+  "Phinney / Greenwood": {
+    "medianYearBuilt": 1958,
+    "medianLotSqft": 7800,
+    "pctWithGarage": 69,
+    "housingMix": {
+      "pctSingleFamily": 96,
+      "pctTownhome": 4,
+      "pctCondo": 0
+    },
+    "_sampleSize": 268,
+    "_note": "King County Assessor EXTR_ResBldg.csv + EXTR_Parcel.csv (May 2026)"
+  },
+  "Queen Anne": {
+    "medianYearBuilt": 1921,
+    "medianLotSqft": 4000,
+    "pctWithGarage": 41,
+    "housingMix": {
+      "pctSingleFamily": 89,
+      "pctTownhome": 11,
+      "pctCondo": 0
+    },
+    "_sampleSize": 63,
+    "_note": "King County Assessor EXTR_ResBldg.csv + EXTR_Parcel.csv (May 2026)"
+  },
+  "Roosevelt": {
+    "medianYearBuilt": 1948,
+    "medianLotSqft": 6000,
+    "pctWithGarage": 60,
+    "housingMix": {
+      "pctSingleFamily": 99,
+      "pctTownhome": 1,
+      "pctCondo": 0
+    },
+    "_sampleSize": 209,
+    "_note": "King County Assessor EXTR_ResBldg.csv + EXTR_Parcel.csv (May 2026)"
+  },
+  "Sunset Hill": {
+    "medianYearBuilt": 1959,
+    "medianLotSqft": 8190,
+    "pctWithGarage": 74,
+    "housingMix": {
+      "pctSingleFamily": 99,
+      "pctTownhome": 1,
+      "pctCondo": 0
+    },
+    "_sampleSize": 199,
+    "_note": "King County Assessor EXTR_ResBldg.csv + EXTR_Parcel.csv (May 2026)"
+  },
+  "Wallingford": {
+    "medianYearBuilt": 1927,
+    "medianLotSqft": 4057,
+    "pctWithGarage": 45,
+    "housingMix": {
+      "pctSingleFamily": 80,
+      "pctTownhome": 20,
+      "pctCondo": 0
+    },
+    "_sampleSize": 101,
+    "_note": "King County Assessor EXTR_ResBldg.csv + EXTR_Parcel.csv (May 2026)"
+  },
+  "West Seattle (Admiral)": {
+    "medianYearBuilt": 1948,
+    "medianLotSqft": 5733,
+    "pctWithGarage": 37,
+    "housingMix": {
+      "pctSingleFamily": 92,
+      "pctTownhome": 8,
+      "pctCondo": 0
+    },
+    "_sampleSize": 127,
+    "_note": "King County Assessor EXTR_ResBldg.csv + EXTR_Parcel.csv (May 2026)"
+  }
+}

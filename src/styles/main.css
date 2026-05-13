@@ -383,6 +383,27 @@ input[type="range"]::-moz-range-thumb {
   text-transform: uppercase; letter-spacing: 0.08em; margin-top: 1px;
 }
 
+.housing-char {
+  padding: 10px 12px; border: 1px solid var(--rule);
+  background: var(--paper); margin-top: 8px;
+}
+.housing-char .heading {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; text-transform: uppercase; letter-spacing: 0.16em;
+  color: var(--ink-faint); margin-bottom: 8px;
+  display: flex; justify-content: space-between;
+}
+.housing-char .heading .src { font-style: italic; text-transform: none; letter-spacing: 0.04em; }
+.hc-rows { display: flex; flex-direction: column; gap: 4px; }
+.hc-row {
+  display: flex; justify-content: space-between; align-items: baseline;
+  font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  padding: 2px 0; border-bottom: 1px solid var(--paper-shade);
+}
+.hc-row:last-child { border-bottom: none; }
+.hck { color: var(--ink-faint); font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; flex-shrink: 0; }
+.hcv { color: var(--ink); font-weight: 500; text-align: right; margin-left: 8px; }
+
 .pc { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .pc h4 {
   font-family: 'JetBrains Mono', monospace; font-size: 9px;

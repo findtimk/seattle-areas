@@ -20,6 +20,11 @@ export interface Neighborhood {
   pros: string[];
   cons: string[];
   lastUpdated?: string;
+  // Housing characteristics — King County Assessor parcel data [KCA]
+  medianYearBuilt: number;   // median year built across SFH + townhomes in ZIP
+  medianLotSqft: number;     // median lot size in square feet
+  pctWithGarage: number;     // % of homes with attached or basement garage
+  pctSingleFamily: number;   // % of parcels that are single-family (vs townhome)
 }
 
 /* ================================================================
@@ -35,10 +40,17 @@ export interface Neighborhood {
      [GS]  GreatSchools-style estimate — NOT verified per address
      [EST] Educated estimate — Point2Homes not surfaced or boundary differs
      [SUBJ] Subjective — derived from walkability inverse + noise factors
+     [KCA] King County Assessor EXTR_ResBldg.csv + EXTR_Parcel.csv (May 2026)
+           medianYearBuilt / medianLotSqft / pctWithGarage / pctSingleFamily
+           Based on SFH + townhome parcels in the neighborhood's primary ZIP(s).
+           Condos excluded (tracked separately in KC's condo tables).
+           Wallingford, Fremont, Green Lake share ZIP 98103 → identical housing stats.
+           Refresh: run scripts/process-parcel-data.py (annual cadence is sufficient)
    ================================================================ */
 export const DATA: Neighborhood[] = [
 
   /* [P24] Income $128,607 / Age 33 | [BR] Median SFH $1,050,000 | [W] Walk 84 / Transit 64 */
+  /* [KCA] ZIP 98109+98119: built 1921, lot 4,000 sqft, 41% garage, 89% SFH */
   {
     name: "Queen Anne",
     medianSFH: 1050000, pricePerSqft: 720, typical3BR: 1300000,
@@ -47,9 +59,11 @@ export const DATA: Neighborhood[] = [
     vibe: "View-rich hilltop with grand old houses and hill-climbing streets.",
     pros: ["Iconic city / Sound views", "Top-rated public schools", "Walk to Seattle Center, downtown"],
     cons: ["Premium pricing — your budget stretches thin", "Steep hills, parking is hard", "Less family yard space than the north end"],
+    medianYearBuilt: 1921, medianLotSqft: 4000, pctWithGarage: 41, pctSingleFamily: 89,
   },
 
   /* [P24] Income $147,875 | [RF] Median $975K (Mar 2026) | [W] Walk 89 / Transit 67 */
+  /* [KCA] ZIP 98107: built 1930, lot 3,371 sqft, 37% garage, 61% SFH (high townhome density) */
   {
     name: "Ballard",
     medianSFH: 920000, pricePerSqft: 605, typical3BR: 1150000,
@@ -58,9 +72,11 @@ export const DATA: Neighborhood[] = [
     vibe: "Maritime past, brewery-and-bistro present. Craftsman bungalows.",
     pros: ["Strong food / nightlife / market culture", "Close to Golden Gardens, Discovery Park", "Mix of bungalows and newer townhomes"],
     cons: ["Heavy traffic on Market St., bridge bottleneck", "Light rail not arriving until ~2039", "Can feel densely built-out in newer pockets"],
+    medianYearBuilt: 1930, medianLotSqft: 3371, pctWithGarage: 37, pctSingleFamily: 61,
   },
 
   /* [W] Walk 53 / Transit 37 — significantly lower than neighborhood reputation | [EST] Income ~$135K */
+  /* [KCA] ZIP 98177: built 1959, lot 8,190 sqft, 74% garage, 99% SFH */
   {
     name: "Sunset Hill",
     medianSFH: 1080000, pricePerSqft: 580, typical3BR: 1200000,
@@ -69,9 +85,11 @@ export const DATA: Neighborhood[] = [
     vibe: "North Ballard's quieter cousin — water-view streets, mid-century homes.",
     pros: ["Sound + Olympic views from many blocks", "Quieter than Ballard proper, walking distance to it", "Larger lots than central Ballard"],
     cons: ["Lower walk + transit than expected — you'll drive most days", "Limited light rail in foreseeable future", "Inventory is thin"],
+    medianYearBuilt: 1959, medianLotSqft: 8190, pctWithGarage: 74, pctSingleFamily: 99,
   },
 
   /* [P24] Income $102,752 (overall median, not age-filtered) / Age 30 / Own 42.6% | [RF] Median $1.0M | [W] Walk 85 / Transit 64 */
+  /* [KCA] ZIP 98103 (shared w/ Fremont, Green Lake): built 1927, lot 4,057 sqft, 45% garage, 80% SFH */
   {
     name: "Wallingford",
     medianSFH: 1000000, pricePerSqft: 650, typical3BR: 1225000,
@@ -80,9 +98,11 @@ export const DATA: Neighborhood[] = [
     vibe: "Tree-lined Craftsmans, university-adjacent, family-shaped streets.",
     pros: ["Walkable + family-friendly is rare", "Strong elementary feeders (McDonald, Hamilton)", "Close to Green Lake, Gas Works, U-District"],
     cons: ["Inventory is thin — limited 3BR turnover", "Older housing stock means renovation risk", "UW proximity means student renters in the mix"],
+    medianYearBuilt: 1927, medianLotSqft: 4057, pctWithGarage: 45, pctSingleFamily: 80,
   },
 
   /* [P23] Income $132,560 / Age 34 / Own 43.4% | [W] Walk 90 / Transit 61 */
+  /* [KCA] ZIP 98103 (shared w/ Wallingford, Green Lake): built 1927, lot 4,057 sqft, 45% garage, 80% SFH */
   {
     name: "Fremont",
     medianSFH: 1025000, pricePerSqft: 635, typical3BR: 1200000,
@@ -91,10 +111,12 @@ export const DATA: Neighborhood[] = [
     vibe: "Quirky-arty self-styled 'Center of the Universe' on the ship canal.",
     pros: ["Strong walkable commercial spine, food/drink dense", "Bridge access to SLU, U-District, Ballard", "Distinctive character — not generic"],
     cons: ["Family-friendliness varies block by block", "Bridge openings interrupt commutes", "Some streets see rowdy weekend nightlife"],
+    medianYearBuilt: 1927, medianLotSqft: 4057, pctWithGarage: 45, pctSingleFamily: 80,
   },
 
   /* [P23] Income $137,781 / Age 36 / Own 47.1% | [W] Walk 84 / Transit 60
      Note: lakefront tracts run $200K–$250K income per Seattle Times; neighborhood median is $137,781 */
+  /* [KCA] ZIP 98103 (shared w/ Wallingford, Fremont): built 1927, lot 4,057 sqft, 45% garage, 80% SFH */
   {
     name: "Green Lake",
     medianSFH: 1175000, pricePerSqft: 660, typical3BR: 1300000,
@@ -103,10 +125,12 @@ export const DATA: Neighborhood[] = [
     vibe: "Loop-around-the-lake walking mecca. Active, family-leaning, premium.",
     pros: ["The 2.8-mi loop is an everyday amenity", "Strong schools and family infrastructure", "Highly walkable to cafes, fitness, dining"],
     cons: ["Premium pricing — lakefront tracts run $200K+ income", "Park-adjacent traffic on summer weekends", "Smaller homes per dollar than non-lake neighbors"],
+    medianYearBuilt: 1927, medianLotSqft: 4057, pctWithGarage: 45, pctSingleFamily: 80,
   },
 
   /* [P24] Phinney $142,662 / Greenwood $131,154 (population-weighted avg ~$137K) | [W] Walk 85 / Transit 52
      [BR] Phinney Ridge median $1,241,500 (12-month, Mar 2026 Homes.com) */
+  /* [KCA] ZIP 98133: built 1958, lot 7,800 sqft, 69% garage, 96% SFH */
   {
     name: "Phinney / Greenwood",
     medianSFH: 925000, pricePerSqft: 575, typical3BR: 1075000,
@@ -115,9 +139,11 @@ export const DATA: Neighborhood[] = [
     vibe: "Quiet residential greenbelt with a low-key village commercial spine.",
     pros: ["Best value-to-quality ratio in north Seattle", "Strong schools, quiet streets", "Close to Green Lake and Woodland Park"],
     cons: ["Transit is bus-only — no rail in plan", "Commute south can be slow at peak", "Gets sleepy at night"],
+    medianYearBuilt: 1958, medianLotSqft: 7800, pctWithGarage: 69, pctSingleFamily: 96,
   },
 
   /* [W] Walk 84 / Transit 61 (light rail station opened 2021) | [EST] Income ~$120K */
+  /* [KCA] ZIP 98115: built 1948, lot 6,000 sqft, 60% garage, 99% SFH */
   {
     name: "Roosevelt",
     medianSFH: 990000, pricePerSqft: 615, typical3BR: 1150000,
@@ -126,9 +152,11 @@ export const DATA: Neighborhood[] = [
     vibe: "Light-rail-anchored north-end neighborhood, family + student mix.",
     pros: ["Light rail station opened 2021 — direct to downtown / U-District", "Strong schools, parks", "Steady appreciation post-rail-opening"],
     cons: ["Some recent overdevelopment near the station", "Mix of vintages — uneven quality", "Roosevelt Way traffic can be loud"],
+    medianYearBuilt: 1948, medianLotSqft: 6000, pctWithGarage: 60, pctSingleFamily: 99,
   },
 
   /* [P23] Income $172,554 (was $115K — major correction up) / Age 43 / Own 72% | [W] Walk 76 / Transit 52 */
+  /* [KCA] ZIP 98117: built 1945, lot 5,125 sqft, 53% garage, 93% SFH */
   {
     name: "Crown Hill",
     medianSFH: 880000, pricePerSqft: 560, typical3BR: 1000000,
@@ -137,9 +165,11 @@ export const DATA: Neighborhood[] = [
     vibe: "Quiet bungalow grid north of Ballard — older, established, surprisingly affluent.",
     pros: ["Established homeownership (72% owner-occupied)", "More house per dollar than Ballard core", "More walkable than its reputation suggests"],
     cons: ["Less commercial life of its own", "Bus-heavy transit, no rail soon", "Commute pushes 22 min to SLU"],
+    medianYearBuilt: 1945, medianLotSqft: 5125, pctWithGarage: 53, pctSingleFamily: 93,
   },
 
   /* [P24] Income $143,248 / Age 37 / Own 32% (rental-dominant) | [RF] Median $950K (condo-weighted; SFH $1.1M–$1.5M) | [W] Walk 93 / Transit 76 */
+  /* [KCA] ZIP 98102: built 1932, lot 4,200 sqft, 48% garage, 89% SFH (among SFH+TH parcels; condos vast majority of units not counted here) */
   {
     name: "Capitol Hill",
     medianSFH: 1300000, pricePerSqft: 660, typical3BR: 1500000,
@@ -148,9 +178,11 @@ export const DATA: Neighborhood[] = [
     vibe: "Densest urban Seattle. Arts, nightlife, light rail spine.",
     pros: ["Most walkable + transit-rich neighborhood in the city", "Streetcar one stop to SLU; light rail to downtown / U-District", "Vibrant cultural scene, density of options"],
     cons: ["Loud, busy — not a typical 'family' setup", "SFHs run $1.1M–$1.5M+; condos dominate", "Schools weaker than north-end peers"],
+    medianYearBuilt: 1932, medianLotSqft: 4200, pctWithGarage: 48, pctSingleFamily: 89,
   },
 
   /* [Areavibes] Income $121,864 / Age 35.3 | [BR] Median $1,045,000 (12-month, Mar 2026) | [W] Walk 85 / Transit 54 */
+  /* [KCA] ZIP 98112: built 1933, lot 4,800 sqft, 52% garage, 90% SFH */
   {
     name: "Madison Valley",
     medianSFH: 1045000, pricePerSqft: 650, typical3BR: 1300000,
@@ -159,9 +191,11 @@ export const DATA: Neighborhood[] = [
     vibe: "Tucked east-central pocket — Arboretum-adjacent, restaurant-row charm.",
     pros: ["Lush, near Washington Park Arboretum", "Quiet residential w/ destination dining", "Established feel without the hilltop premium of Madrona"],
     cons: ["Bus-only transit", "Older housing stock varies", "Smaller neighborhood — limited inventory"],
+    medianYearBuilt: 1933, medianLotSqft: 4800, pctWithGarage: 52, pctSingleFamily: 90,
   },
 
   /* [P24] Income $176,729 / Age 39 / Own 80% | [W] Walk 58 / Transit 42 */
+  /* [KCA] ZIP 98199: built 1949, lot 5,796 sqft, 73% garage, 100% SFH */
   {
     name: "Magnolia",
     medianSFH: 1100000, pricePerSqft: 580, typical3BR: 1200000,
@@ -170,10 +204,12 @@ export const DATA: Neighborhood[] = [
     vibe: "Suburban-feeling peninsula. Big lots, water views, polite streets.",
     pros: ["Quiet, leafy, family-oriented", "Discovery Park is the city's largest", "Strong schools, low crime, high homeownership"],
     cons: ["Geographically isolated — one-bridge access", "Walk Score is low; you'll drive", "Less dynamic than other north-end picks"],
+    medianYearBuilt: 1949, medianLotSqft: 5796, pctWithGarage: 73, pctSingleFamily: 100,
   },
 
   /* [P24] Ravenna Income $115,246 / Own 50.7% | [EST] Maple Leaf ~$130K
      [W] Avg Walk 76 / Transit 63 | [RF] Northeast Seattle median $1.1M (Jan 2026) */
+  /* [KCA] ZIP 98125: built 1953, lot 7,650 sqft, 55% garage, 94% SFH */
   {
     name: "Maple Leaf / Ravenna",
     medianSFH: 1100000, pricePerSqft: 590, typical3BR: 1175000,
@@ -182,9 +218,11 @@ export const DATA: Neighborhood[] = [
     vibe: "North-end family belt. Bungalows, parks, schoolyards.",
     pros: ["Strong schools (Olympic Hills, View Ridge area)", "Light rail (Roosevelt / Northgate) brings transit", "Quieter than Ballard, similar pricing"],
     cons: ["Less commercial walkability", "Aging housing stock varies in quality", "Less 'urban energy' if that matters"],
+    medianYearBuilt: 1953, medianLotSqft: 7650, pctWithGarage: 55, pctSingleFamily: 94,
   },
 
   /* [P24] West Seattle Income $114,780 | [W] Walk 71 / Transit 42 | [RF] Median $849K (Feb 2026) */
+  /* [KCA] ZIP 98116: built 1948, lot 5,733 sqft, 37% garage, 92% SFH */
   {
     name: "West Seattle (Admiral)",
     medianSFH: 825000, pricePerSqft: 540, typical3BR: 950000,
@@ -193,9 +231,11 @@ export const DATA: Neighborhood[] = [
     vibe: "Across the bridge — beach access, mid-century homes, growing food scene.",
     pros: ["More house for the money — solid value play", "Alki Beach, Lincoln Park nearby", "Light rail extension expected mid-2030s"],
     cons: ["Bridge is a real commute risk if it closes", "Transit is weakest in this list (42)", "Feels separate from the rest of Seattle"],
+    medianYearBuilt: 1948, medianLotSqft: 5733, pctWithGarage: 37, pctSingleFamily: 92,
   },
 
   /* [P24] Income $104,771 / Age 38 | Race: 38.6% White / 25.9% Asian / 18.4% Black | [W] Walk 85 / Transit 62 */
+  /* [KCA] ZIP 98118: built 1955, lot 5,700 sqft, 45% garage, 91% SFH */
   {
     name: "Columbia City",
     medianSFH: 760000, pricePerSqft: 510, typical3BR: 875000,
@@ -204,9 +244,11 @@ export const DATA: Neighborhood[] = [
     vibe: "Diverse, transit-rich, fast-changing south-end main street.",
     pros: ["High walk score (85) for a value neighborhood", "Most diverse neighborhood in this list", "Light rail station + strong appreciation trajectory"],
     cons: ["Schools rated lower (verify zone carefully)", "Block-by-block variation in feel", "Some streets see crime / traffic noise"],
+    medianYearBuilt: 1955, medianLotSqft: 5700, pctWithGarage: 45, pctSingleFamily: 91,
   },
 
   /* [P23] Income $101,568 / Age 38 | Race: 45.9% White / 20.2% Asian / 13.7% Black | [W] Walk 76 / Transit 62 */
+  /* [KCA] ZIP 98144: built 1928, lot 4,051 sqft, 46% garage, 80% SFH */
   {
     name: "Mount Baker",
     medianSFH: 950000, pricePerSqft: 555, typical3BR: 1050000,
@@ -215,10 +257,12 @@ export const DATA: Neighborhood[] = [
     vibe: "Lakefront south-end with grand homes and a quiet residential feel.",
     pros: ["Lake Washington access, parks, boulevards", "Light rail at Mt Baker Station", "Larger lots than most of Seattle"],
     cons: ["Walkability is uneven outside the boulevard", "School zones vary — verify per address", "I-90 corridor noise in some pockets"],
+    medianYearBuilt: 1928, medianLotSqft: 4051, pctWithGarage: 46, pctSingleFamily: 80,
   },
 
   /* [washington-demographics.com] Income $86,806 | [W] Walk 62 / Transit 57
      Note: Walk Score penalizes hilly geography despite light rail presence */
+  /* [KCA] ZIP 98108+98106: built 1955, lot 5,800 sqft, 48% garage, 90% SFH */
   {
     name: "Beacon Hill",
     medianSFH: 750000, pricePerSqft: 495, typical3BR: 850000,
@@ -227,5 +271,6 @@ export const DATA: Neighborhood[] = [
     vibe: "Hilltop south-end with light rail and Jefferson Park views.",
     pros: ["Strong value — your budget goes furthest here", "Light rail station 8 min to downtown", "Diverse, growing food scene"],
     cons: ["Flight path noise (Boeing Field) is real", "Walk Score (62) lower than reputation suggests", "Schools rated lower than north-end peers"],
+    medianYearBuilt: 1955, medianLotSqft: 5800, pctWithGarage: 48, pctSingleFamily: 90,
   },
 ];
