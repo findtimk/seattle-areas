@@ -1,6 +1,6 @@
 import type { Neighborhood } from "../data/neighborhoods";
 import type { AppState, DimensionKey } from "../engine/scoring";
-import { dimensionScores, fitScore, whyTags, fmtMoney, fmtIncome, fmtBudgetLabel } from "../engine/scoring";
+import { dimensionScores, fitScore, whyTags, fmtMoney, fmtIncome, fmtBudgetLabel, fmtRedfin } from "../engine/scoring";
 
 const TOP_N = 5;
 let showAll = false;
@@ -76,6 +76,19 @@ export function renderCards(data: Neighborhood[], state: AppState): void {
       </div>
     `;
 
+    const redfinUrl = (() => {
+      const rf = n.redfin;
+      const price = fmtRedfin(state.budget);
+      const filters = `property-type=house,property-type=townhouse,min-beds=3,max-price=${price}`;
+      if (rf.id && rf.slug) {
+        return `https://www.redfin.com/neighborhood/${rf.id}/WA/Seattle/${rf.slug}/filter/${filters}`;
+      }
+      if (rf.zip) {
+        return `https://www.redfin.com/zipcode/${rf.zip}/filter/${filters}`;
+      }
+      return null;
+    })();
+
     const hidden = !showAll && i >= TOP_N;
 
     const row = document.createElement("div");
@@ -104,6 +117,7 @@ export function renderCards(data: Neighborhood[], state: AppState): void {
             <span class="nsk">$/sqft</span>
             <span class="nsv">$${n.pricePerSqft}</span>
           </div>
+          ${redfinUrl ? `<a class="redfin-link" href="${redfinUrl}" target="_blank" rel="noopener" title="View 3BR listings up to ${fmtMoney(state.budget)} on Redfin">3BR listings ↗</a>` : ""}
         </div>
         <div class="nb-why">${whyCollapsed}</div>
         <div class="nb-fit">
@@ -123,6 +137,11 @@ export function renderCards(data: Neighborhood[], state: AppState): void {
               ${dimRow("transit",       "Transit",  dims.transit)}
               ${dimRow("quietness",     "Quiet",    dims.quietness)}
               ${dimRow("commute",       "Commute",  dims.commute)}
+              ${dimRow("safety",        "Safety",   dims.safety)}
+            </div>
+            <div class="safety-context">
+              All 17 neighborhoods score above Seattle's city avg · <a href="https://crimegrade.org/safest-places-in-seattle-wa/" target="_blank" rel="noopener">Seattle overall: D- nationally</a>
+              ${n.safetyNote ? `<div class="safety-note">⚠ ${n.safetyNote}</div>` : ""}
             </div>
           </div>
           <div>
@@ -166,7 +185,11 @@ export function renderCards(data: Neighborhood[], state: AppState): void {
     root.appendChild(row);
   });
 
-  // Attach click handlers to headers
+  // Attach click handlers to headers (Redfin links stop propagation so they don't toggle the card)
+  root.querySelectorAll<HTMLAnchorElement>(".redfin-link").forEach((link) => {
+    link.addEventListener("click", (e) => e.stopPropagation());
+  });
+
   root.querySelectorAll<HTMLElement>(".nb-header[data-row-index]").forEach((header) => {
     header.addEventListener("click", () => {
       const idx = Number(header.dataset.rowIndex);

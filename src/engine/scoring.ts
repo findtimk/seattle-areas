@@ -1,7 +1,7 @@
 import type { Neighborhood } from "../data/neighborhoods";
 
 export type WeightLevel = 0 | 1 | 2 | 3;
-export type DimensionKey = "affordability" | "walkability" | "schools" | "transit" | "quietness" | "commute";
+export type DimensionKey = "affordability" | "walkability" | "schools" | "transit" | "quietness" | "commute" | "safety";
 
 export interface AppState {
   budget: number;
@@ -23,6 +23,7 @@ export const DIM_LABELS: Record<DimensionKey, DimInfo> = {
   transit:       { name: "Transit",         desc: "Bus + light rail access" },
   quietness:     { name: "Quietness",       desc: "Residential vs urban-busy" },
   commute:       { name: "Commute",         desc: "Drive time to South Lake Union" },
+  safety:        { name: "Safety",          desc: "Crime + livability (relative within this list)" },
 };
 
 export const DEFAULT_STATE: AppState = {
@@ -34,6 +35,7 @@ export const DEFAULT_STATE: AppState = {
     transit:       2,
     quietness:     1,
     commute:       3,
+    safety:        1,
   },
 };
 
@@ -51,6 +53,7 @@ export function dimensionScores(n: Neighborhood, budget: number): Record<Dimensi
     transit:       n.transit,
     quietness:     n.quiet,
     commute:       n.commute,
+    safety:        n.safety,
   };
 }
 
@@ -95,4 +98,12 @@ export function fmtIncome(n: number): string {
 
 export function fmtBudgetLabel(budget: number): string {
   return (budget / 1_000_000).toFixed(2).replace(/\.?0+$/, "");
+}
+
+export function fmtRedfin(budget: number): string {
+  if (budget >= 1_000_000) {
+    const m = budget / 1_000_000;
+    return m % 1 === 0 ? `${m}M` : `${m.toFixed(2).replace(/0+$/, "")}M`;
+  }
+  return `${Math.round(budget / 1000)}k`;
 }

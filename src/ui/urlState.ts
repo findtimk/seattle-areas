@@ -1,7 +1,7 @@
 import type { AppState, DimensionKey, WeightLevel } from "../engine/scoring";
 import { DEFAULT_STATE } from "../engine/scoring";
 
-const DIM_ORDER: DimensionKey[] = ["affordability", "walkability", "schools", "transit", "quietness", "commute"];
+const DIM_ORDER: DimensionKey[] = ["affordability", "walkability", "schools", "transit", "quietness", "commute", "safety"];
 
 export function readUrlState(): AppState {
   const params = new URLSearchParams(window.location.search);
